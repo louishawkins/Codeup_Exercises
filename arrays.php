@@ -13,14 +13,15 @@ Create a variable $test and make it a multidimensional array with the keys perso
 $arrayNumbers = array(1,2,3,4,5);
 $arrayNumbers2 = [1,2,3,4,5];
 
-echo $arrayNumbers[3];
+echo "$arrayNumbers[3]\n";
 
 $arrayInfo = [
 	'first_name' => 'Louis',
 	'last_name' => 'Hawkins',
-	'email' => ['louishawkins@gmail.com', 'louishawkins@utexas.edu', 'louis.hawkins@utsa.edu'],
+	'email' => ["louishawkins@gmail.com", "louishawkins@utexas.edu", "louis.hawkins@utsa.edu"],
 	'phone' => ['cell' => '+18309311398', 'home' => '+18309313827', 'office' => '+12103446755']
 
 ];
+
 
 
