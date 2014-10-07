@@ -8,7 +8,12 @@ $things = [100, 'Sgt. Pepper', "11", null, array(1,2,3), 3.14, "12 + 7", false, 
 echo "This is what is in the array \$things:\n\n";
 
 foreach ($things as $item){
-	echo "[$item] ";
+	if (is_array($item)) {
+		foreach($item as $element) {
+			echo " [$element] ";
+		}
+	}
+	else {echo " [$item] ";}
 }
 //Loop that indicates the type of data each item in the array is.
 echo "\n\nArray items data types: \n\n\n";
@@ -48,10 +53,6 @@ foreach ($things as $item){
 	if (is_scalar($item) == true) {
 		echo "$item is a SCALAR\n";
 	}
-
-
-
-
 }
 
 exit(0);
