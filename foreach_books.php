@@ -24,18 +24,27 @@ $books = array(
 
 /*Construct a loop that iterates through each book and then each book's keys and values. Have it output the book's title, then list the key value pairs for the data about each book.*/
 
-foreach($books as $title => $details){
-	echo "\nTitle: {$title}\n";
+/*foreach($books as $title => $details){
+	echo "\ntitle: {$title}\n";
 
 	foreach($details as $key => $detail) {
 		echo "$key: $detail\n";
 	}
 
-}
-
+}*/
 
 /*Update your loop to only show books that were written after 1950.*/
 
+foreach($books as $title => $details){
+	if($details['published'] > 1950){
+		echo "\ntitle: {$title}\n";
+
+		foreach($details as $key => $detail) {
+			echo "$key: $detail\n";
+		}
+	}
+	else {}
+}
 
 exit(0);
 
