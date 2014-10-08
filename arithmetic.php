@@ -56,7 +56,7 @@ function modulus($a, $b) {
 
 function errorNonnumeric($a, $b) {
 		echo "ERROR: Both arguments must be numbers\n";
-		echo is_numeric($a) ? null : '$a';
+		echo is_numeric($a) ? null : $a;
 		echo is_numeric($b) ? null : $b;
 		return null;
 }
@@ -66,29 +66,52 @@ function errorDividezero($a, $b) {
 		return false;
 }
 
+function getOperands() {
+			echo "\n>";
+			$a = fgets(STDIN);
+			echo ">";
+			$b = fgets(STDIN);
+			echo "\n";
+			$result = [$a, $b];
+			return $result;
+}
 
-echo "100%13 is " . 100 % 13 . " & ";
-modulus(100, 13);
+echo `clear`;
+echo "************************************************************\n";
+echo "Do arithmetic on two integers.\n";
+echo "************************************************************\n";
 
-echo "100/5 is " . 100 / 5 . " & ";
-divide(100, 5);
+do{
+	fwrite(STDOUT, "\n(A)dd  (S)ubtract  (M)ultiply  (D)ivide  m(O)dulus  (Q)uit\n\n> ");
+	$menu = trim(strtolower(fgets(STDIN)));
 
-echo "7*10 is " . 7 * 10 . " & ";
-multiply(7, 10);
+	switch ($menu) {
+		case 'a':
+			$input = getOperands();
+			echo add((int) $input[0], (int) $input[1]);
+			break;
+		case 's':
+			$input = getOperands();
+			echo subtract((int) $input[0], (int) $input[1]);
+			break;
+		case 'm':
+			$input = getOperands();
+			echo multiply((int) $input[0], (int) $input[1]);
+			break;
+		case 'd':
+			$input = getOperands();
+			echo divide((int) $input[0], (int) $input[1]);
+			break;
+		case 'o':
+			$input = getOperands();
+			echo modulus((int) $input[0], (int) $input[1]);
+			break;
+		default:
+			break;
+	}
 
-echo "8 - 3 is " . 8 - 3 . " & ";
-subtract(8,3);
 
-echo "200 + 30 is " . 200 + 30 . " & ";
-add(200, 30);
-
-echo "\n\nERROR TESTING :: \n\n";
-echo "29 / 0 is ";
-divide(29, 0);
-echo "\n60 % 0 is ";
-modulus(60, 0);
-echo "\n50 + bananas ";
-add(50, "bananas");
+} while ($menu != "q");
 
 exit(0);
 
