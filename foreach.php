@@ -43,9 +43,8 @@ foreach ($things as $item){
 	//is_null();
 	elseif (is_null($item) == true) {
 		echo "$item: NULL\n";
-	}	
+	}
 }
-
 //Output only items that are SCALAR.
 echo "\n\nThese are the SCALAR items in the array: \n\n";
 
