@@ -1,69 +1,23 @@
 <?php
 
 function add($a, $b) {
-	if (is_numeric($a) && is_numeric($b)) {
-		return (int) $a + (int) $b . "\n";
-	}
-	else {
-		errorNonnumeric($a, $b);
-	}
+	return (int) $a + (int) $b . "\n";
 }
 
 function subtract($a, $b) {
-	if (is_numeric($a) && is_numeric($b)) {
-		return (int) $a - (int) $b . "\n";
-	}
-	else {
-		errorNonnumeric($a, $b);
-	}
+	return (int) $a - (int) $b . "\n";
 }
 
 function multiply($a, $b) {
-	if (is_numeric($a) && is_numeric($b)) {
-		return (int) $a * (int) $b . "\n";
-	}
-	else {
-		errorNonnumeric($a, $b);
-	}
+	return (int) $a * (int) $b . "\n";
 }
 
 function divide($a, $b) {
-	if (is_numeric($a) && is_numeric($b)) {
-		if ($b != 0){
-			return (int) $a / (int) $b . "\n";
-		}
-		else {
-			errorDividezero($a, $b);
-		}
-	}
-	else {
-		errorNonnumeric($a, $b);
-	}
+	return (int) $a / (int) $b . "\n";
 }
+
 function modulus($a, $b) {
-	if (is_numeric($a) && is_numeric($b)) {
-		if ($b != 0) {
-			return (int) $a % (int) $b . "\n";
-		}
-		else {
-			errorDividezero($a, $b);
-		}
-	}
-	else {
-		errorNonnumeric($a, $b);
-	}
-}
-
-function errorNonnumeric($a, $b) {
-		echo "ERROR: Both arguments must be numbers\n";
-		echo is_numeric($a) ? null : $a;
-		echo is_numeric($b) ? null : $b;
-		return null;
-}
-
-function errorDividezero($a, $b) {
-		echo "ERROR: Divide by 0 -- $a % $b";
-		return false;
+	return (int) $a % (int) $b . "\n";
 }
 
 function getOperands() {
@@ -90,27 +44,40 @@ do{
 			$input = getOperands();
 			echo add((int) $input[0], (int) $input[1]);
 			break;
+
 		case 's':
 			$input = getOperands();
 			echo subtract((int) $input[0], (int) $input[1]);
 			break;
+
 		case 'm':
 			$input = getOperands();
 			echo multiply((int) $input[0], (int) $input[1]);
 			break;
+
 		case 'd':
 			$input = getOperands();
-			echo divide((int) $input[0], (int) $input[1]);
+			if($input[1] == 0) {
+				echo "ERROR: DIVIDE BY 0";
+			}
+			else {
+				echo divide((int) $input[0], (int) $input[1]);
+			}
 			break;
+
 		case 'o':
 			$input = getOperands();
-			echo modulus((int) $input[0], (int) $input[1]);
+			if($input[1] == 0) {
+				echo "ERROR: DIVIDE BY 0";	
+			}
+			else {	
+				echo modulus((int) $input[0], (int) $input[1]);
+			}
 			break;
+
 		default:
 			break;
 	}
-
-
 } while ($menu != "q");
 
 exit(0);
