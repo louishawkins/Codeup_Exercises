@@ -1,20 +1,30 @@
  <?php
 
  // Converts array into list n1, n2, ..., and n3
- function humanizedList($array) {
- 		$array = implode(', ', $array);
- 		return $array;
- }
+function humanizedList($array) {
+ 	$array = implode(', ', $array);
+    return $array;
+}
 
  // List of famous peeps
- $physicistsString = 'Gordon Freeman, Samantha Carter, Sheldon Cooper, Quinn Mallory, Bruce Banner, Tony Stark';
+$physicistsString = 'Gordon Freeman, Samantha Carter, Sheldon Cooper, Quinn Mallory, Bruce Banner, Tony Stark';
 
- // TODO: Convert the string into an array
- $physicistsArray = explode(', ', $physicistsString);
+ // Convert the string into an array
+$physicistsArray = explode(', ', $physicistsString);
+ 
 
-echo "// Convert the string into an array //\n";
- print_r($physicistsArray);
+echo "\n// Sort the list alphabetically? (Y/N) ";
+$convert_yn = trim(strtoupper(fgets(STDIN)));
 
+switch($convert_yn) {
+	case 'Y':
+		sort($physicistsArray);
+		break;
+	case 'N':
+		break;
+	default:
+		break;
+}
  // Humanize that list
  $famousFakePhysicists = humanizedList($physicistsArray);
 
