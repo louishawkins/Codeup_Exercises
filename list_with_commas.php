@@ -2,12 +2,14 @@
 
  // Converts array into list n1, n2, ..., and n3
 function humanizedList($array) {
- 	$array = implode(', ', $array);
-    return $array;
+	$lastName = array_pop($array);
+	$array[] = "and $lastName";
+ 	$implodedString = implode(', ', $array);
+    return $implodedString;
 }
 
  // List of famous peeps
-$physicistsString = 'Gordon Freeman, Samantha Carter, Sheldon Cooper, Quinn Mallory, Bruce Banner, Tony Stark';
+$physicistsString = 'Gordon Freeman, Zebra Zoo, Samantha Carter, Sheldon Cooper, Quinn Mallory, Bruce Banner, Tony Stark';
 
  // Convert the string into an array
 $physicistsArray = explode(', ', $physicistsString);
