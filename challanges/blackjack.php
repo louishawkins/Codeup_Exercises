@@ -28,7 +28,6 @@ function buildDeck($suits, $cards) {
 function cardIsAce($card) {
     return 11;
   }
-
 // determine the value of an individual card (string)
 // aces are worth 11
 // face cards are worth 10
@@ -67,7 +66,6 @@ function getHandTotal($hand) {
 // pass by reference (both hand and deck passed in are modified)
 function drawCard(&$hand, &$deck) {
     $hand[] = array_pop($deck);
-    return $hand;
   }
 
 // print out a hand of cards
@@ -92,18 +90,18 @@ function echoHand($hand, $name, $hidden = false) {
 
 // build the deck of cards
 $deck = buildDeck($suits, $cards);
-
+echo "\nInitial deck size is" . sizeof($deck);
 // initialize a dealer and player hand
 $dealer = [];
 $player = [];
 
 // dealer and player each draw two cards
 for($i = 0; $i < 2; $i++) {
-	$dealer[] = array_pop($deck);
+	drawCard($dealer, $deck);
+  drawCard($player, $deck);
 }
-for($i = 0; $i < 2; $i++) {
-	$player[] = array_pop($deck);
-}
+
+echo "\n\nAfter initial draw:" . sizeof($deck);
 // echo the dealer hand, only showing the first card
 echo "Dealer:";
 print_r($dealer);
@@ -119,24 +117,40 @@ $playerTotal = getHandTotal($player);
 echo $playerTotal;
 
 // allow player to "(H)it or (S)tay?" till they bust (exceed 21) or stay
-while ($playerTotal < 21 || $choice == "H") {
+while ($playerTotal < 22 && $stay == false) {
     echo "(H)it or (S)tay? ";
-    $choice = fgets(STDIN);
+    $choice = strtoupper(trim(fgets(STDIN)));
     if ($choice == "H") {
       // Draw card
       drawCard($player, $deck);
+      print_r($player);
       $playerTotal = getHandTotal($player);
+      echo $playerTotal;
     }
-    else {continue;}
+    elseif ($choice == "S"){
+      $stay = true;
+    }
 }
 
 // show the dealer's hand (all cards)
-// todo
-
-// todo (all comments below)
-
+print_r($dealer);
 // at this point, if the player has more than 21, tell them they busted
 // otherwise, if they have 21, tell them they won (regardless of dealer hand)
+if($playerTotal > 21) {
+    echo "\nYou exceeded 21, busted.\n";
+}
+elseif ($playerTotal == 21) {
+    echo "\nTWENTY-ONE!!!\n";
+}
+elseif ($playerTotal < 21 && $playerTotal > $dealerTotal) {
+    echo "\nYou beat the dealer, you win!\n";
+}
+elseif ($playerTotal < 21 && $playerTotal < $dealerTotal) {
+    echo "\nThe dealer beat you!\n";
+}
+else {
+  echo "blah";
+}
 
 // if neither of the above are true, then the dealer needs to draw more cards
 // dealer draws until their hand has a value of at least 17
