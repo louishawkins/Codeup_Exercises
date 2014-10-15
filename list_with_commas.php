@@ -1,7 +1,7 @@
  <?php
 
  // Converts array into list n1, n2, ..., and n3
-function humanizedList($array) {
+function humanizedList($array, $alpha = false) {
 	$lastName = array_pop($array);
 	$array[] = "and $lastName";
  	$implodedString = implode(', ', $array);
@@ -16,19 +16,10 @@ $physicistsArray = explode(', ', $physicistsString);
  
 
 echo "\n// Sort the list alphabetically? (Y/N) ";
-$convert_yn = trim(strtoupper(fgets(STDIN)));
+$alpha = trim(strtoupper(fgets(STDIN)));
 
-switch($convert_yn) {
-	case 'Y':
-		sort($physicistsArray);
-		break;
-	case 'N':
-		break;
-	default:
-		break;
-}
  // Humanize that list
- $famousFakePhysicists = humanizedList($physicistsArray);
+ $famousFakePhysicists = humanizedList($physicistsArray, $alpha);
 
  // Output sentence
  echo "Some of the most famous fictional theoretical physicists are {$famousFakePhysicists}.\n";
