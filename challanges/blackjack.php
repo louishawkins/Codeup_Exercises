@@ -42,8 +42,8 @@ function getCardValue($card) {
           return $cardValue;
     }
     elseif ($cardNumber == "A") {
-          cardIsAce($card);
-          break;
+          $cardValue = cardIsAce($card);
+          return $cardValue;
     }
     else {
           $cardValue = (int)$cardNumber;
@@ -75,22 +75,24 @@ function drawCard(&$hand, &$deck) {
 // Dealer: [4 C] [???] Total: ???
 // or:
 // Player: [J D] [2 D] Total: 12
-function echoHand($hand, $name, $hidden = false) {
+function echoHand($hand, $hidden = false) {
   switch($hidden){
   	case true:
-  		echo '[' . $name[$hand] . "]\n";
+  		echo '[' . $hand[0] . "]";
+      echo " [??]";
       break;
   	case false:
-  		foreach($name as $card){
-  			echo '[' . $name[$card] . "]\n";
-        break;
-  		}
+  		for($i = 0; $i < sizeof($hand); $i++){
+          echo "[{$hand[$i]}] ";
+      }
+    break;
   }
+return;
 }
 
 // build the deck of cards
 $deck = buildDeck($suits, $cards);
-echo "\nInitial deck size is" . sizeof($deck);
+
 // initialize a dealer and player hand
 $dealer = [];
 $player = [];
@@ -100,32 +102,30 @@ for($i = 0; $i < 2; $i++) {
 	drawCard($dealer, $deck);
   drawCard($player, $deck);
 }
-
-echo "\n\nAfter initial draw:" . sizeof($deck);
 // echo the dealer hand, only showing the first card
-echo "Dealer:";
-print_r($dealer);
+echo "\nDealer Hand:";
+echoHand($dealer, true);
+
 // get dealer hand total
-echo "dealer total: ";
-echo getHandTotal($dealer);
+$dealerTotal = getHandTotal($dealer);
 // echo the player hand
-echo "Player:";
-print_r($player);
+echo "\n\nPlayer Hand: ";
+echoHand($player);
 // get player hand total
-echo "player total: ";
+echo "\n\nplayer total: ";
 $playerTotal = getHandTotal($player);
 echo $playerTotal;
 
 // allow player to "(H)it or (S)tay?" till they bust (exceed 21) or stay
 while ($playerTotal < 22 && $stay == false) {
-    echo "(H)it or (S)tay? ";
+    echo "\n\n(H)it or (S)tay? ";
     $choice = strtoupper(trim(fgets(STDIN)));
     if ($choice == "H") {
       // Draw card
       drawCard($player, $deck);
-      print_r($player);
+      echoHand($player);
       $playerTotal = getHandTotal($player);
-      echo $playerTotal;
+      echo "\nPlayer total: $playerTotal";
     }
     elseif ($choice == "S"){
       $stay = true;
@@ -133,24 +133,33 @@ while ($playerTotal < 22 && $stay == false) {
 }
 
 // show the dealer's hand (all cards)
-print_r($dealer);
+echo "Dealer's hand revealed: ";
+echoHand($dealer);
 // at this point, if the player has more than 21, tell them they busted
 // otherwise, if they have 21, tell them they won (regardless of dealer hand)
-if($playerTotal > 21) {
-    echo "\nYou exceeded 21, busted.\n";
+if($dealerTotal < 17){
+  drawCard($dealer);
+  echo "Deal draws...\n";
+  echoHand($dealer);
+  $dealerTotal = getHandTotal($dealer);
+  echo "Dealer total is {$dealerTotal}";
 }
-elseif ($playerTotal == 21) {
-    echo "\nTWENTY-ONE!!!\n";
-}
-elseif ($playerTotal < 21 && $playerTotal > $dealerTotal) {
-    echo "\nYou beat the dealer, you win!\n";
-}
-elseif ($playerTotal < 21 && $playerTotal < $dealerTotal) {
-    echo "\nThe dealer beat you!\n";
-}
-else {
-  echo "blah";
-}
+
+  if($playerTotal > 21) {
+      echo "\nYou exceeded 21, busted.\n";
+  }
+  elseif ($playerTotal == 21) {
+      echo "\nTWENTY-ONE!!!\n";
+  }
+  elseif ($playerTotal < 21 && $playerTotal > $dealerTotal) {
+      echo "\nYou beat the dealer, you win!\n";
+  }
+  elseif ($playerTotal < 21 && $playerTotal < $dealerTotal) {
+      echo "\nThe dealer beat you!\n";
+  }
+  else {
+    echo "blah";
+  }
 
 // if neither of the above are true, then the dealer needs to draw more cards
 // dealer draws until their hand has a value of at least 17
