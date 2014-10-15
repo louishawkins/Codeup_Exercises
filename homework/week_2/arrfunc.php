@@ -69,10 +69,8 @@ function randomNumbers() {
 
 function minMax($array_of_numbers) {
     sort($array_of_numbers);
-    $_min = $array_of_numbers[0];
-    $_max = $array_of_numbers[4];
-    $_minMax[0] = $_min;
-    $_minMax[1] = $_max;
+    $_minMax[0] = $array_of_numbers[0];
+    $_minMax[1] = $array_of_numbers[4];
     return$_minMax;
 }
 
