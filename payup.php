@@ -1,7 +1,5 @@
 <?php
 
-// array with days of the week
-
 $days_of_the_week = [
 	'Sunday',
 	'Monday',
@@ -24,9 +22,9 @@ while ($money <= 100) {
 		$money += 20;
 	}
 	//echo results
-	echo "\n{$days_of_the_week[$today]} :\n";
-	echo "{$money}\n";
-	echo "_________________\n";
+	echo "\n{$days_of_the_week[$today]} :" . PHP_EOL;
+	echo "{$money}" . PHP_EOL;
+	echo "_________________" . PHP_EOL;
 
 	sleep(0);
 	$today++;

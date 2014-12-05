@@ -8,7 +8,7 @@ while($numberRolls > 0){
 
 	$roll = mt_rand(1, SIDES_OF_DICE);
 
-	echo "You rolled {$roll}\n";
+	echo "You rolled {$roll}" . PHP_EOL;
 
 	$numberRolls --;
 }

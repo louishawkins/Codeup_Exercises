@@ -1,9 +1,6 @@
 ##Codeup Exercises
-This is my personal repository of exercises.
-
-- Roll dice. Takes commandline argument for number of desired rolls.
-- Arrays, arrays within arrays.
-- Increment and decrement.
-- Demonstrates if statements and operators.
-- Perhaps some surprises.
-
+This is my personal repository of exercises completed during the first half of Codeup. All command-line PHP scripts. 
+- FizzBuzz
+- Roll Dice
+- Search Arrays
+- More!

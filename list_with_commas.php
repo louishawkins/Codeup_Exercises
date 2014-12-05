@@ -22,7 +22,7 @@ $alpha = trim(strtoupper(fgets(STDIN)));
  $famousFakePhysicists = humanizedList($physicistsArray, $alpha);
 
  // Output sentence
- echo "Some of the most famous fictional theoretical physicists are {$famousFakePhysicists}.\n";
+ echo "Some of the most famous fictional theoretical physicists are {$famousFakePhysicists}." . PHP_EOL;
 
  exit(0);
 

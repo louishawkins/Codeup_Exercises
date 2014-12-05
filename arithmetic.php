@@ -21,13 +21,13 @@ function modulus($a, $b) {
 }
 
 function getOperands() {
-			echo "\n>";
-			$a = fgets(STDIN);
-			echo ">";
-			$b = fgets(STDIN);
-			echo "\n";
-			$result = [$a, $b];
-			return $result;
+	echo "\n>";
+	$a = fgets(STDIN);
+	echo ">";
+	$b = fgets(STDIN);
+	echo "\n";
+	$result = [$a, $b];
+	return $result;
 }
 
 echo `clear`;
